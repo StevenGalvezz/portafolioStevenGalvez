@@ -30,4 +30,25 @@ public class CategoriaService {
         }
         return categoriaRepository.findAll();
     }
+    
+    @Transactional(readOnly = true)
+public Categoria getCategoria(Categoria categoria) {
+    return categoriaRepository.findById(categoria.getIdCategoria()).orElse(null);
+}
+
+@Transactional
+public void save(Categoria categoria) {
+    categoriaRepository.save(categoria);
+}
+
+@Transactional
+public boolean delete(Categoria categoria) {
+    try {
+        categoriaRepository.delete(categoria);
+        categoriaRepository.flush();
+        return true;
+    } catch (Exception e) {
+        return false;
+    }
+}
 }
