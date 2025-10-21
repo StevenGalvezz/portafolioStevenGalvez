@@ -29,7 +29,7 @@ public class IndexController {
         return "/index";
     }
     
-    @GetMapping("/consultas/{idCategoria}")
+    /*@GetMapping("/consultas/{idCategoria}")
     public String listado(@PathVariable("idCategoria") Integer idCategoria, Model model) {
         model.addAttribute("idCategoriaActual", idCategoria);
         var categoriaOptional = categoriaService.getCategoria(idCategoria);
@@ -44,5 +44,5 @@ public class IndexController {
         var categorias = categoriaService.getCategorias(true);
         model.addAttribute("categorias", categorias);
         return "/index";
-    }
+    }*/
 }
