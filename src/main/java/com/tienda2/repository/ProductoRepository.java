@@ -4,12 +4,15 @@
  */
 package com.tienda2.repository;
 
-import com.tienda2.domain.Categoria;
+import com.tienda2.domain.Producto;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 /**
  *
  * @author Juan
  */
-public interface ProductoRepository extends JpaRepository<Categoria, Integer>{
+public interface ProductoRepository extends JpaRepository<Producto, Integer>{
+    public List<Producto> findByActivoTrue();
     
 }
