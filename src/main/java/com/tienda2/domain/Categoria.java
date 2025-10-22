@@ -47,7 +47,7 @@ public class Categoria implements Serializable {
     @Column(name = "activo")
     private Boolean activo;
     
-    //Relación de uno a muchos con la clase Producto
+    /*Relación de uno a muchos con la clase Producto
     @OneToMany (mappedBy = "categoria")
-    private List<Producto> productos;
+    private List<Producto> productos;*/
 }
