@@ -14,11 +14,11 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 /**
  *
  * @author Juan
  */
-
 @Service
 public class ProductoService {
 
@@ -38,29 +38,26 @@ public class ProductoService {
     public Optional<Producto> getProducto(Integer idProducto) {
         return productoRepository.findById(idProducto);
     }
-
+    
     @Autowired
     private FirebaseStorageService firebaseStorageService;
     
     @Transactional
-    public void save(Producto producto, MultipartFile imagenFile) {
+    public void save (Producto producto, MultipartFile imagenFile) {
         producto = productoRepository.save(producto);
         if (!imagenFile.isEmpty()) { //Si no está vacío... pasaron una imagen...
-            //try {
-                String rutaImagen = firebaseStorageService.cargaImagen(
-                    imagenFile, "producto",
-                    producto.getIdProducto());
-                producto.setRutaImagen(rutaImagen);
-                productoRepository.save(producto);
-            //} catch (IOException e) {
-                // Manejo de excepción (deshabilitada a ver si sirve)
-            //}
+            String rutaImagen = firebaseStorageService.uploadImage(
+                    imagenFile,
+                    "producto",
+                    producto.getIdProducto()); // Manejo de excepción de IO
+            producto.setRutaImagen(rutaImagen);
+            productoRepository.save(producto);
         }
     }
 
     @Transactional
-    public void delete(Integer idProducto) {
-        // Verifica si la categoría existe antes de intentar eliminarlo
+    public void delete (Integer idProducto) {
+        // Verifica si la categoria existe antes de intentar eliminar
         if (!productoRepository.existsById(idProducto)) {
             // Lanza una excepción para indicar que el usuario no fue encontrado
             throw new IllegalArgumentException("La categoria con ID " + idProducto + " no existe.");
@@ -69,8 +66,7 @@ public class ProductoService {
             productoRepository.deleteById(idProducto);
         } catch (DataIntegrityViolationException e) {
             // Lanza una nueva excepción para encapsular el problema de integridad de datos
-            throw new IllegalStateException("No se puede eliminar el producto. Tiene datos asociados.", e);
+            throw new IllegalStateException("No se puede eliminar la producto. Tiene datos asociados.", e);
         }
     }
-
 }

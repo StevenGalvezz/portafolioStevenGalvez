@@ -3,16 +3,18 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<!-- Esta es la página principal del sitio web TechShop -->
-<html>
-    <head th:replace="~{general/fragmentos :: head}"/>
-
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>TechShop</title>
+    </head>
     <body>
-        <header th:replace="~{general/fragmentos :: header}"/>
+        <header th:replace="~{general/fragmentos :: header}"></header>
 
-        <section th:replace="~{producto/fragmentos :: editar}"/>
-        <section th:replace="~{general/fragmentos :: mostrarToast}"/>
+        <section th:replace="~{producto/fragmentos :: editar}"></section>
+        <section th:replace="~{general/fragmentos :: mostrarToast}"></section>
 
-        <footer th:replace="~{general/fragmentos :: footer}"/>
+        <footer th:replace="~{general/fragmentos :: footer}"></footer>
     </body>
 </html>
